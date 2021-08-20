@@ -1,0 +1,10 @@
+"AppFeedback.title" = "Feedback";
+"AppFeedback.action" = "Give feedback";
+"AppFeedback.includeAttachmentLabel" = "Automatically attach technically relevant information";
+"AppFeedback.infoTextIntro" = "We appreciate ";
+"AppFeedback.infoText" = "your feedback! \nNo matter if you have ideas, suggestions or proposals for improvement - if you have something on your mind, please share it with us! In order to help us answer you as quickly and efficiently as possible, you can attach the information that is technically relevant to us.";
+"AppFeedback.rateAction" = "Rate on App Store";
+
+"AppFeedback.noMailAlertTitle" = "No mail account configured";
+"AppFeedback.noMailAlertMessage" = "You do not have an email account set up on your device. Unfortunately, you cannot send feedback because of this. \nConfigure an email account in the system settings to continue.";
+"AppFeedback.okay" = "Okay";

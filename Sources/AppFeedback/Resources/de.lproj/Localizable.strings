@@ -1,0 +1,11 @@
+"AppFeedback.title" = "Feedback";
+"AppFeedback.action" = "Feedback geben";
+"AppFeedback.includeAttachmentLabel" = "Technisch relevante Informationen automatisch anhängen";
+
+"AppFeedback.infoTextIntro" = "Wir freuen uns ";
+"AppFeedback.infoText" = "über Dein Feedback! \nEgal ob Ideen, Anregungen oder Verbesserungsvorschläge - wenn Du etwas auf der Seele hast, dann immer her damit! Damit wir Dir so schnell und effizient wie möglich antworten können, kannst Du die für uns technisch relevanten Informationen direkt mit anhängen.";
+"AppFeedback.rateAction" = "Im AppStore bewerten";
+
+"AppFeedback.noMailAlertTitle" = "Kein E-Mail Konto konfiguriert";
+"AppFeedback.noMailAlertMessage" = "Du hast auf Deinem Gerät kein E-Mail Konto eingerichtet. Leider kannst Du deswegen kein Feedback senden. \nKonfiguriere ein E-Mail Konto in den Systemeinstellungen, um fortzufahren.";
+"AppFeedback.okay" = "Okay";
