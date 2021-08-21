@@ -1,7 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "feedback-illustration.pdf",
+      "filename" : "feedback-light.pdf",
+      "idiom" : "universal"
+    },
+    {
+      "appearances" : [
+        {
+          "appearance" : "luminosity",
+          "value" : "dark"
+        }
+      ],
+      "filename" : "feedback-dark.pdf",
       "idiom" : "universal"
     }
   ],
