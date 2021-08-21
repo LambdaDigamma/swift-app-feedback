@@ -14,11 +14,14 @@ public struct FeedbackActionRow: View {
     @State public var attachInformation: Bool = true
     
     public var composeFeedback: (_ attachInformation: Bool) -> Void
+    public let configuration: FeedbackConfiguration
     
     public init(
+        configuration: FeedbackConfiguration,
         composeFeedback: @escaping (_ attachInformation: Bool) -> Void
     ) {
         self.composeFeedback = composeFeedback
+        self.configuration = configuration
     }
     
     public var body: some View {
@@ -33,10 +36,10 @@ public struct FeedbackActionRow: View {
                     composeFeedback(attachInformation)
                 }, label: {
                     Text(stringResolver.resolve("AppFeedback.action"))
-                        .foregroundColor(.white)
+                        .foregroundColor(configuration.buttonAppearance.foregroundColor)
                 })
                 .accessibility(identifier: "AppFeedback.actionButton")
-                .buttonStyle(BlockButtonStyle(color: .blue))
+                .buttonStyle(BlockButtonStyle(color: configuration.buttonAppearance.backgroundColor))
                 .padding(.bottom, 8)
                 
                 Toggle(isOn: $attachInformation, label: {
@@ -61,12 +64,14 @@ struct FeedbackActionRow_Previews: PreviewProvider {
     static var previews: some View {
         
         let stringResolver = StringResolver(bundle: .module)
+        let firstConfiguration = FeedbackConfiguration(receiver: "test@example.org", subject: "Feedback")
+        let secondConfiguration = FeedbackConfiguration(receiver: "test@example.org", subject: "Feedback", buttonAppearance: ButtonAppearance(backgroundColor: .red, foregroundColor: .white))
         
-        FeedbackActionRow(composeFeedback: { _ in })
+        FeedbackActionRow(configuration: firstConfiguration, composeFeedback: { _ in })
             .environmentObject(stringResolver)
             .previewLayout(.sizeThatFits)
         
-        FeedbackActionRow(composeFeedback: { _ in })
+        FeedbackActionRow(configuration: secondConfiguration, composeFeedback: { _ in })
             .environmentObject(stringResolver)
             .previewLayout(.sizeThatFits)
             .environment(\.colorScheme, .dark)

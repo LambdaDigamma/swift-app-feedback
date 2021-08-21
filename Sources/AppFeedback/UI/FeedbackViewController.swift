@@ -38,16 +38,18 @@ public class FeedbackViewController: UIViewController {
     public override func viewDidLoad() {
         super.viewDidLoad()
 
+        self.title = stringResolver.resolve("AppFeedback.title")
         self.setupUI()
 
     }
 
     // MARK: - UI
 
-    private func setupUI() {
-
-        self.title = stringResolver.resolve("AppFeedback.title")
-
+    /// Adds the user interface to the view controller
+    /// and hooks up the actions.
+    /// You may override this to provide a different user interface.
+    open func setupUI() {
+        
         let view = FeedbackView(
             configuration: configuration,
             stringResolver: stringResolver,
@@ -61,6 +63,9 @@ public class FeedbackViewController: UIViewController {
 
     // MARK: - Actions
 
+    /// Show the message user interface with the attached information
+    /// if the user decided to provide it.
+    /// You may override this to use another messaging interface.
     open func showFeedbackComposer(attachInformation: Bool) {
 
         if !MFMailComposeViewController.canSendMail() {
@@ -81,14 +86,9 @@ public class FeedbackViewController: UIViewController {
         self.present(composeController, animated: true, completion: nil)
 
     }
-
-    open func collectSystemInformation() -> String {
-        
-        return feedbackDataCollector.collect()
-            .joined(separator: "\n")
-        
-    }
     
+    /// Shows an alert that no mail account is configured on this device.
+    /// You may override this to present a different alert.
     open func showNoMailConfigured() {
 
         let alert = UIAlertController(
@@ -109,6 +109,9 @@ public class FeedbackViewController: UIViewController {
 
     }
     
+    /// Opens the App Store page of the app with a flag
+    /// to prompt for a review.
+    /// You may override this to show something different.
     open func openReview() {
         
         guard configuration.showReview, let appStoreID = configuration.appStoreID else {
@@ -118,6 +121,15 @@ public class FeedbackViewController: UIViewController {
         let appStorePage = AppStorePage(id: appStoreID)
         
         appStorePage.openReview()
+        
+    }
+    
+    // MARK: - Helpers
+    
+    open func collectSystemInformation() -> String {
+        
+        return feedbackDataCollector.collect()
+            .joined(separator: "\n")
         
     }
     

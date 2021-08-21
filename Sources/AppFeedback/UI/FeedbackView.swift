@@ -41,7 +41,7 @@ public struct FeedbackView: View {
                     
                     VStack {
                         
-                        Image("feedback-illustration", bundle: .module)
+                        configuration.feedbackImage
                             .resizable()
                             .scaledToFit()
                             .accessibility(identifier: "AppFeedback.feedbackImage")
@@ -57,6 +57,7 @@ public struct FeedbackView: View {
                     .padding()
                     
                     FeedbackActionRow(
+                        configuration: configuration,
                         composeFeedback: onComposeFeedback
                     )
                     .frame(maxWidth: .infinity)

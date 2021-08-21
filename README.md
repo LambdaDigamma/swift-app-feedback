@@ -3,7 +3,7 @@
 <p align="left">
 <img src="https://img.shields.io/apm/l/atomic-design-ui.svg">
 <img src="https://img.shields.io/badge/package_manager-SPM-orange.svg">
-<img src="https://img.shields.io/badge/platforms-iOS-lightgrey.svg">
+<img src="https://img.shields.io/badge/platforms-iOS-blue.svg">
 <img src="https://img.shields.io/badge/localized_for-en|de-lightgrey.svg">
 </p>
 
@@ -23,10 +23,25 @@ dependencies: [
 
 ## Documentation
 
-…
+To use the `AppFeedback` user interface and the default setup, 
+you just need to create a `FeedbackViewController` with a `FeedbackConfiguration`.
+
+```swift 
+import AppFeedback
+
+let configuration = FeedbackConfiguration(
+    receiver: "info@example.org",
+    subject: "Feedback",
+)
+
+let viewController = FeedbackViewController(configuration: configuration)
+
+self.navigationController.pushViewController(viewController, animated: true)
+```
 
 ### Feedback configuration
 
+The feedback has a few configuration options.
 …
 
 ### Changing the copy of the views
@@ -35,17 +50,41 @@ You can easily swap or change all texts (e.g. title, button, help text, etc.) by
 
 > ⚠️ Attention
 > If you want to customize strings by providing a custom string resolver, make sure to provide a string for every key into your `Localizable.strings` file.
-> You can find the latest strings used by this package [here](Source/AppFeedback/Resources/en.lproj/Localizable.strings).
+> You can find the latest strings used by this package [here](Sources/AppFeedback/Resources/en.lproj/Localizable.strings).
 
 
 ### Use custom button color
 
-To provide a custom button color you can customize the feedback configuration appearance.
+![Button Colors](.assets/button-colors.jpg)
+
+To provide a custom button color you can customize the `buttonAppearance` of the feedback configuration.
+
+Just initialize a ButtonAppearance and pass it into the configuration.
+```swift
+let buttonAppearance = ButtonAppearance(
+    backgroundColor: .red, 
+    foregroundColor: .white
+)
+
+let configuration = FeedbackConfiguration(
+    …,
+    buttonAppearance: buttonAppearance
+)
+```
+
 
 ### Provide your own feedback data
 
 You can easily attach your own feedback to the email by passing an object that conforms to the `FeedbackDataCollecting` protocol into the `FeedbackViewController`.
+
 This protocol only requires you to implement a `collect()` method which returns an array of strings.
+
+### Providing a custom view and subclassing the view controller
+
+You can also create your own subclass of `FeedbackViewController`.
+All of the actions and also the view setup can be overwritten.
+
+See [`FeedbackViewController`](Sources/AppFeedback/UI/FeedbackViewController.swift) to learn what to override.
 
 ## Roadmap
 
