@@ -9,14 +9,6 @@ import Foundation
 
 public protocol FeedbackDataCollecting: AnyObject {
     
-    func collect()
-    
-    var identifierForVendor: String? { get }
-    
-    var name: String { get }
-    
-    var system: String { get }
-    
-    var battery: String { get }
+    func collect() -> [String]
     
 }

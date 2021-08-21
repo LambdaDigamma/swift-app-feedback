@@ -42,8 +42,8 @@ public struct FeedbackActionRow: View {
                 Toggle(isOn: $attachInformation, label: {
                     Text(stringResolver.resolve("AppFeedback.includeAttachmentLabel"))
                         .font(.subheadline)
-                        .foregroundColor(.secondary)
                         .lineLimit(nil)
+                        .foregroundColor(.secondary)
                         .accessibility(identifier: "AppFeedback.includeAttachmentLabel")
                 })
                 .accessibility(identifier: "AppFeedback.includeAttachmentToggle")

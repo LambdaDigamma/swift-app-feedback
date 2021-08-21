@@ -36,6 +36,7 @@ public class AppStorePage {
         }
         
         #if os(iOS)
+        logger.info("Opening App Store write review page: \(writeReviewURL.absoluteString)")
         UIApplication.shared.open(writeReviewURL)
         #else
         logger.error("Not able to open write review url")
@@ -44,7 +45,7 @@ public class AppStorePage {
     }
     
     public var productPageURL: URL? {
-        return URL(string: "https://itunes.apple.com/app/id\(id)")
+        return URL(string: "itms-apps://itunes.apple.com/app/id\(id)")
     }
     
 }

@@ -30,13 +30,40 @@ extension UIDevice.BatteryState: CustomStringConvertible {
     
 }
 
-public class FeedbackDataCollector: FeedbackDataCollecting {
+public extension UIDevice {
     
-    public init() {
+    var modelIdentifier: String {
+        
+        var systemInfo = utsname()
+        uname(&systemInfo)
+        let machineMirror = Mirror(reflecting: systemInfo.machine)
+        let identifier = machineMirror.children.reduce("") { identifier, element in
+            guard let value = element.value as? Int8, value != 0 else { return identifier }
+            return identifier + String(UnicodeScalar(UInt8(value)))
+        }
+        
+        return identifier
         
     }
     
-    public func collect() {
+}
+
+public class FeedbackDataCollector: FeedbackDataCollecting {
+    
+    public init(additionalInformation: [String] = []) {
+        self.additionalInformation = additionalInformation
+    }
+    
+    public func collect() -> [String] {
+        
+        return [
+            "\n",
+            self.name,
+            self.modelIdentifier,
+            self.system,
+            self.identifierForVendor,
+        ]
+        .compactMap({ $0 }) + additionalInformation
         
     }
     
@@ -52,9 +79,15 @@ public class FeedbackDataCollector: FeedbackDataCollecting {
         return "\(UIDevice.current.systemName) (\(UIDevice.current.systemVersion))"
     }
     
+    public var modelIdentifier: String {
+        return UIDevice.current.modelIdentifier
+    }
+    
     public var battery: String {
         return "\(UIDevice.current.batteryState) \(UIDevice.current.batteryLevel)"
     }
+    
+    public var additionalInformation: [String] = []
     
 }
 

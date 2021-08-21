@@ -12,6 +12,8 @@ public struct FeedbackView: View {
     @ObservedObject var stringResolver: StringResolver
     @State public var attachInformation: Bool = true
 
+    private let configuration: FeedbackConfiguration
+    
     /// Function called when user tapped compose feedback.
     /// Boolean determines whether technical information
     /// should be attached.
@@ -20,10 +22,12 @@ public struct FeedbackView: View {
     public var onRateAppStore: () -> Void
     
     public init(
+        configuration: FeedbackConfiguration,
         stringResolver: StringResolver,
         onComposeFeedback: @escaping (Bool) -> Void,
         onRateAppStore: @escaping () -> Void
     ) {
+        self.configuration = configuration
         self.stringResolver = stringResolver
         self.onComposeFeedback = onComposeFeedback
         self.onRateAppStore = onRateAppStore
@@ -33,13 +37,14 @@ public struct FeedbackView: View {
         VStack {
             
             ScrollView {
-                LazyVStack {
+                VStack {
                     
                     VStack {
                         
                         Image("feedback-illustration", bundle: .module)
                             .resizable()
                             .scaledToFit()
+                            .accessibility(identifier: "AppFeedback.feedbackImage")
                             .frame(maxWidth: 500, alignment: .center)
                             .padding(.bottom, 20)
                         
@@ -51,23 +56,30 @@ public struct FeedbackView: View {
                     }
                     .padding()
                     
+                    FeedbackActionRow(
+                        composeFeedback: onComposeFeedback
+                    )
+                    .frame(maxWidth: .infinity)
+                    
+                    if configuration.showReview {
+                        
+                        Divider()
+                        
+                        Button(action: onRateAppStore, label: {
+                            Text("\(Image(systemName: "star")) \(stringResolver.resolve("AppFeedback.rateAction"))")
+                                .foregroundColor(.secondary)
+                        })
+                        .accessibility(identifier: "AppFeedback.rateButton")
+                        .padding(.vertical, 8)
+                        
+                        Divider()
+                            .padding(.bottom, 20)
+                        
+                    }
+                    
                 }
                 
-                FeedbackActionRow(
-                    composeFeedback: onComposeFeedback
-                )
-                
-                Divider()
-                
-                Button(action: onRateAppStore, label: {
-                    Text("\(Image(systemName: "star")) \(stringResolver.resolve("AppFeedback.rateAction"))")
-                })
-                .padding(.vertical, 8)
-                
-                Divider()
-                .padding(.bottom, 20)
-                
-            }
+            }.frame(maxWidth: .infinity, alignment: .leading)
             
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -84,8 +96,11 @@ public struct FeedbackView: View {
 
 struct FeedbackView_Previews: PreviewProvider {
     static var previews: some View {
+        
+        let configuration = FeedbackConfiguration(receiver: "info@example.org", subject: "Feedback")
+        
         NavigationView {
-            FeedbackView(stringResolver: .default, onComposeFeedback: { _ in }, onRateAppStore: {})
+            FeedbackView(configuration: configuration, stringResolver: .default, onComposeFeedback: { _ in }, onRateAppStore: {})
         }
     }
 }

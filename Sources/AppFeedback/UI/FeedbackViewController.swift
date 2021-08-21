@@ -16,12 +16,15 @@ public class FeedbackViewController: UIViewController {
     private let logger: Logger = Logger(OSLog.feedback)
     private let configuration: FeedbackConfiguration
     private let stringResolver: StringResolver
+    private let feedbackDataCollector: FeedbackDataCollecting
     
     public init(
         configuration: FeedbackConfiguration,
+        feedbackDataCollector: FeedbackDataCollecting = FeedbackDataCollector(),
         stringResolver: StringResolver = .default
     ) {
         self.configuration = configuration
+        self.feedbackDataCollector = feedbackDataCollector
         self.stringResolver = stringResolver
         super.init(nibName: nil, bundle: nil)
     }
@@ -46,6 +49,7 @@ public class FeedbackViewController: UIViewController {
         self.title = stringResolver.resolve("AppFeedback.title")
 
         let view = FeedbackView(
+            configuration: configuration,
             stringResolver: stringResolver,
             onComposeFeedback: showFeedbackComposer,
             onRateAppStore: openReview
@@ -57,7 +61,7 @@ public class FeedbackViewController: UIViewController {
 
     // MARK: - Actions
 
-    private func showFeedbackComposer(attachInformation: Bool) {
+    open func showFeedbackComposer(attachInformation: Bool) {
 
         if !MFMailComposeViewController.canSendMail() {
             showNoMailConfigured()
@@ -69,31 +73,23 @@ public class FeedbackViewController: UIViewController {
         composeController.navigationBar.tintColor = .systemBlue
         composeController.setToRecipients(configuration.receivers)
         composeController.setSubject(configuration.subject)
-        composeController.setMessageBody(collectSystemInformation(), isHTML: false)
+        
+        if attachInformation {
+            composeController.setMessageBody(collectSystemInformation(), isHTML: false)
+        }
         
         self.present(composeController, animated: true, completion: nil)
 
     }
 
-    private func collectSystemInformation() -> String {
+    open func collectSystemInformation() -> String {
         
-        let collector = FeedbackDataCollector()
-        
-        let data = [
-            "\n",
-            collector.name,
-            collector.system,
-            collector.identifierForVendor,
-            collector.battery
-        ]
-        .compactMap({ $0 })
-        .joined(separator: "\n")
-        
-        return data
+        return feedbackDataCollector.collect()
+            .joined(separator: "\n")
         
     }
     
-    private func showNoMailConfigured() {
+    open func showNoMailConfigured() {
 
         let alert = UIAlertController(
             title: stringResolver.resolve("AppFeedback.noMailAlertTitle"),
@@ -113,7 +109,7 @@ public class FeedbackViewController: UIViewController {
 
     }
     
-    private func openReview() {
+    open func openReview() {
         
         guard configuration.showReview, let appStoreID = configuration.appStoreID else {
             return logger.error("Review is not enabled or app store id is missing.")
