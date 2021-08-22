@@ -1,3 +1,5 @@
+![Hero](.assets/hero.png)
+
 # AppFeedback
 
 <p align="left">
@@ -7,9 +9,9 @@
 <img src="https://img.shields.io/badge/localized_for-en|de-lightgrey.svg">
 </p>
 
-Send email feedback from your iOS application. 
+Send email feedback from your iOS application.
 
-Currently there are english and german translations available for this package. Feel free to contribute another language. 
+Currently there are english and german translations available for this package. Feel free to contribute another language.
 
 ## Installation
 
@@ -23,10 +25,10 @@ dependencies: [
 
 ## Documentation
 
-To use the `AppFeedback` user interface and the default setup, 
+To use the `AppFeedback` user interface and the default setup,
 you just need to create a `FeedbackViewController` with a `FeedbackConfiguration`.
 
-```swift 
+```swift
 import AppFeedback
 
 let configuration = FeedbackConfiguration(
@@ -52,7 +54,6 @@ You can easily swap or change all texts (e.g. title, button, help text, etc.) by
 > If you want to customize strings by providing a custom string resolver, make sure to provide a string for every key into your `Localizable.strings` file.
 > You can find the latest strings used by this package [here](Sources/AppFeedback/Resources/en.lproj/Localizable.strings).
 
-
 ### Use custom button color
 
 ![Button Colors](.assets/button-colors.jpg)
@@ -60,9 +61,10 @@ You can easily swap or change all texts (e.g. title, button, help text, etc.) by
 To provide a custom button color you can customize the `buttonAppearance` of the feedback configuration.
 
 Just initialize a ButtonAppearance and pass it into the configuration.
+
 ```swift
 let buttonAppearance = ButtonAppearance(
-    backgroundColor: .red, 
+    backgroundColor: .red,
     foregroundColor: .white
 )
 
@@ -71,7 +73,6 @@ let configuration = FeedbackConfiguration(
     buttonAppearance: buttonAppearance
 )
 ```
-
 
 ### Provide your own feedback data
 
