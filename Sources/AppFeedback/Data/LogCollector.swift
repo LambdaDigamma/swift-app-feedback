@@ -70,7 +70,7 @@ public class LogCollector: LogCollecting {
     /// when the system logs should be retrieved.
     /// - Parameter collectedMinutesSinceNow: Specify the number of minutes the log collector should go back
     public init(collectedMinutesSinceNow: Double = 15) throws {
-        self.collectedMinutesSinceNo = collectedMinutesSinceNow
+        self.collectedMinutesSinceNow = collectedMinutesSinceNow
         #if os(macOS)
         store = try OSLogStore.local()
         #else
