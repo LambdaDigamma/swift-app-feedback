@@ -79,6 +79,25 @@ public class FeedbackViewController: UIViewController {
         composeController.setToRecipients(configuration.receivers)
         composeController.setSubject(configuration.subject)
         
+        if #available(iOS 15.0, *) {
+            
+            do {
+                let logCollector = try LogCollector()
+                
+                if let url = try logCollector.collect()  {
+                    let data = try Data(contentsOf: url)
+                    composeController.addAttachmentData(data, mimeType: "application/json", fileName: "Activity.feedback")
+                }
+                
+            } catch {
+                
+                print("data collection failed")
+                print(error.localizedDescription)
+                
+            }
+            
+        }
+        
         if attachInformation {
             composeController.setMessageBody(collectSystemInformation(), isHTML: false)
         }
