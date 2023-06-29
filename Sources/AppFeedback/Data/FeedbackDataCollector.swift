@@ -61,6 +61,7 @@ public class FeedbackDataCollector: FeedbackDataCollecting {
             self.name,
             self.modelIdentifier,
             self.system,
+            "\(Bundle.main.releaseVersionNumber ?? "n/v") (\(Bundle.main.buildVersionNumber ?? "n/v"))",
             self.identifierForVendor,
         ]
         .compactMap({ $0 }) + additionalInformation

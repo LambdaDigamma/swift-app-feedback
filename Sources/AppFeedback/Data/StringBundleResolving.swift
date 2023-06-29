@@ -26,7 +26,21 @@ public class StringResolver: ObservableObject {
     /// - Parameter key: The key of the localized string
     /// - Returns: The localized string
     open func resolve(_ key: String) -> String {
-        return NSLocalizedString(key, bundle: bundle, value: "", comment: "")
+        
+        let value = NSLocalizedString(key, bundle: bundle, value: "", comment: "")
+        
+        if value != key || Locale.preferredLanguages.first == "en" {
+            return value
+        }
+        
+        guard
+            let path = bundle.path(forResource: "en", ofType: "lproj"),
+            let localeBundle = Bundle(path: path)
+        else {
+            return value
+        }
+        
+        return NSLocalizedString(key, bundle: localeBundle, comment: "")
     }
     
 }

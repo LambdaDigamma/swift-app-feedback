@@ -97,7 +97,11 @@ public class LogCollector: LogCollecting {
                 .compactMap({ $0 as? OSLogEntryLog })
                 .map({ LogEntry(osLogEntryLog: $0) })
                 
-            let feedback = Feedback(deviceState: DefaultStateInformation(batteryLevel: 1), logEntries: logEntries)
+            let feedback = Feedback(
+                deviceState: DefaultStateInformation(batteryLevel: 1),
+                appInformation: AppInformation.loadCurrent(),
+                logEntries: logEntries
+            )
             
             let encoder = JSONEncoder()
             let data = try encoder.encode(feedback)

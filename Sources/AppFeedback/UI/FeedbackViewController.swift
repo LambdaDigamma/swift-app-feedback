@@ -82,17 +82,18 @@ public class FeedbackViewController: UIViewController {
         if #available(iOS 15.0, *) {
             
             do {
+                logger.info("Trying to create the log collector")
                 let logCollector = try LogCollector()
                 
+                logger.info("Starting to collect the feedback information")
                 if let url = try logCollector.collect()  {
                     let data = try Data(contentsOf: url)
-                    composeController.addAttachmentData(data, mimeType: "application/json", fileName: "Activity.feedback")
+                    composeController.addAttachmentData(data, mimeType: "application/json", fileName: "Activity.appfeedback")
                 }
                 
             } catch {
                 
-                print("data collection failed")
-                print(error.localizedDescription)
+                logger.error("Data collection failed due to error: \(error.localizedDescription, privacy: .public)")
                 
             }
             

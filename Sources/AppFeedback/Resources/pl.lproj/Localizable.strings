@@ -1,0 +1,13 @@
+"AppFeedback.title" = "Feedback";
+"AppFeedback.action" = "Przekaż opinię";
+"AppFeedback.includeAttachmentLabel" = "Automatycznie dołączaj istotne informacje techniczne";
+"AppFeedback.infoTextIntro" = "Dziękujemy ";
+"AppFeedback.infoText" = "za Twoją opinię!
+Bez względu na to, czy masz pomysły, sugestie lub propozycje ulepszeń – jeśli masz pomysł podziel się nim z nami!
+Aby pomóc nam szybko i skutecznie odpowiedzieć, możesz dołączyć informacje, które są dla nas istotne z technicznego punktu widzenia.
+";
+"AppFeedback.rateAction" = "Oceń w App Store";
+
+"AppFeedback.noMailAlertTitle" = "Nie skonfigurowano konta e-mail";
+"AppFeedback.noMailAlertMessage" = "Nie masz skonfigurowanego konta e-mail na swoim urządzeniu. Niestety z tego powodu nie możesz wysłać opinii. Skonfiguruj konto e-mail w ustawieniach systemu, aby kontynuować.";
+"AppFeedback.okay" = "Dobra";
