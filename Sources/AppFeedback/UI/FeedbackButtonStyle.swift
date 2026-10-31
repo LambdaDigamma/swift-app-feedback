@@ -22,6 +22,9 @@ private struct FeedbackButtonStyleModifier: ViewModifier {
         if #available(iOS 26.0, macOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, *) {
             content
                 .buttonStyle(.glassProminent)
+                .controlSize(.large)
+                .buttonBorderShape(.capsule)
+                .font(.body.bold())
                 .tint(color)
         } else {
             content

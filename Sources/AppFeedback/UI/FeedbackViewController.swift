@@ -175,3 +175,15 @@ extension FeedbackViewController: MFMailComposeViewControllerDelegate {
 
 
 #endif
+
+@available(iOS 17.0)
+#Preview {
+    
+    let stringResolver = StringResolver(bundle: .module)
+    let firstConfiguration = FeedbackConfiguration(receiver: "test@example.org", subject: "Feedback")
+    
+    FeedbackViewController(
+        configuration: firstConfiguration,
+        stringResolver: stringResolver
+    )
+}

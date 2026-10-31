@@ -38,9 +38,9 @@ extension UIViewController {
         hostingController.view.translatesAutoresizingMaskIntoConstraints = false
         let constraints = [
             hostingController.view.topAnchor.constraint(equalTo: view.topAnchor),
-            hostingController.view.leftAnchor.constraint(equalTo: view.leftAnchor),
-            view.bottomAnchor.constraint(equalTo: hostingController.view.bottomAnchor),
-            view.rightAnchor.constraint(equalTo: hostingController.view.rightAnchor)
+            hostingController.view.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            hostingController.view.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            hostingController.view.trailingAnchor.constraint(equalTo: view.trailingAnchor),
         ]
         
         NSLayoutConstraint.activate(constraints)

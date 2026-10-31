@@ -37,6 +37,7 @@ public struct FeedbackActionRow: View {
                 }, label: {
                     Text(stringResolver.resolve("AppFeedback.action"))
                         .foregroundColor(configuration.buttonAppearance.foregroundColor)
+                        .frame(maxWidth: .infinity)
                 })
                 .accessibility(identifier: "AppFeedback.actionButton")
                 .feedbackButtonStyle(color: configuration.buttonAppearance.backgroundColor)
