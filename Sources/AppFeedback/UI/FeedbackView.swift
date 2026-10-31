@@ -34,56 +34,53 @@ public struct FeedbackView: View {
     }
 
     public var body: some View {
-        VStack {
-            
-            ScrollView {
+        
+        ScrollView {
+            VStack {
+                
                 VStack {
                     
-                    VStack {
-                        
-                        configuration.feedbackImage
-                            .resizable()
-                            .scaledToFit()
-                            .accessibility(identifier: "AppFeedback.feedbackImage")
-                            .frame(maxWidth: 500, alignment: .center)
-                            .padding(.bottom, 20)
-                        
-                        Text(stringResolver.resolve("AppFeedback.infoTextIntro"))
-                            .bold()
-                            + Text(stringResolver.resolve("AppFeedback.infoText"))
+                    configuration.feedbackImage
+                        .resizable()
+                        .scaledToFit()
+                        .accessibility(identifier: "AppFeedback.feedbackImage")
+                        .frame(maxWidth: 500, alignment: .center)
+                        .padding(.bottom, 20)
+                    
+                    Text(stringResolver.resolve("AppFeedback.infoTextIntro"))
+                        .bold()
+                    + Text(stringResolver.resolve("AppFeedback.infoText"))
+                        .foregroundColor(.secondary)
+                    
+                }
+                .padding()
+                
+                FeedbackActionRow(
+                    configuration: configuration,
+                    composeFeedback: onComposeFeedback
+                )
+                .frame(maxWidth: .infinity)
+                
+                if configuration.showReview {
+                    
+                    Divider()
+                    
+                    Button(action: onRateAppStore, label: {
+                        Text("\(Image(systemName: "star")) \(stringResolver.resolve("AppFeedback.rateAction"))")
                             .foregroundColor(.secondary)
-                        
-                    }
-                    .padding()
+                    })
+                    .accessibility(identifier: "AppFeedback.rateButton")
+                    .padding(.vertical, 8)
                     
-                    FeedbackActionRow(
-                        configuration: configuration,
-                        composeFeedback: onComposeFeedback
-                    )
-                    .frame(maxWidth: .infinity)
-                    
-                    if configuration.showReview {
-                        
-                        Divider()
-                        
-                        Button(action: onRateAppStore, label: {
-                            Text("\(Image(systemName: "star")) \(stringResolver.resolve("AppFeedback.rateAction"))")
-                                .foregroundColor(.secondary)
-                        })
-                        .accessibility(identifier: "AppFeedback.rateButton")
-                        .padding(.vertical, 8)
-                        
-                        Divider()
-                            .padding(.bottom, 20)
-                        
-                    }
+                    Divider()
+                        .padding(.bottom, 20)
                     
                 }
                 
-            }.frame(maxWidth: .infinity, alignment: .leading)
+            }
             
         }
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
         .navigationTitle(stringResolver.resolve("AppFeedback.title"))
         .environmentObject(stringResolver)
         

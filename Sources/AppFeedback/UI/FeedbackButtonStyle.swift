@@ -9,6 +9,27 @@ import Foundation
 
 import SwiftUI
 
+extension View {
+    func feedbackButtonStyle(color: Color) -> some View {
+        modifier(FeedbackButtonStyleModifier(color: color))
+    }
+}
+
+private struct FeedbackButtonStyleModifier: ViewModifier {
+    let color: Color
+
+    func body(content: Content) -> some View {
+        if #available(iOS 26.0, macOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, *) {
+            content
+                .buttonStyle(.glassProminent)
+                .tint(color)
+        } else {
+            content
+                .buttonStyle(BlockButtonStyle(color: color))
+        }
+    }
+}
+
 public struct BlockButtonStyle: ButtonStyle {
     
     public var color: Color = Color.accentColor

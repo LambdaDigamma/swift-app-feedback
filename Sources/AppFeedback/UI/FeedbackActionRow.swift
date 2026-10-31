@@ -39,7 +39,7 @@ public struct FeedbackActionRow: View {
                         .foregroundColor(configuration.buttonAppearance.foregroundColor)
                 })
                 .accessibility(identifier: "AppFeedback.actionButton")
-                .buttonStyle(BlockButtonStyle(color: configuration.buttonAppearance.backgroundColor))
+                .feedbackButtonStyle(color: configuration.buttonAppearance.backgroundColor)
                 .padding(.bottom, 8)
                 
                 Toggle(isOn: $attachInformation, label: {
